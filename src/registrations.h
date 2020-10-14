@@ -7,6 +7,7 @@
 
 #include <pcl/point_types.h>
 #include <pcl/registration/icp.h>
+#include <pcl/registration/icp.h>
 #include <pcl/registration/icp_nl.h>
 
 
@@ -18,6 +19,10 @@ typedef pcl::PointCloud<PointNormal>  PointCloudWithNormals;
 class registrations {
 
 public:
+
+    pcl::PointCloud <pcl::PointXYZ>::Ptr icpAlign(pcl::PointCloud<pcl::PointXYZ>::Ptr point_cloud,
+                                                              pcl::PointCloud<pcl::PointXYZ>::Ptr reference, double icp_distance, double epsilon);
+
     Eigen::Matrix4f pairAlign(const PointCloudRGB::Ptr cloud_src, const PointCloudRGB::Ptr cloud_tgt);
 
     pcl::PointCloud <pcl::PointXYZ>::Ptr pointCloudCb(pcl::PointCloud<pcl::PointXYZ>::Ptr point_cloud,

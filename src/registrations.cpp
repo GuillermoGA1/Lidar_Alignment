@@ -3,6 +3,32 @@
 #include <pcl/registration/ndt.h>
 #include "registrations.h"
 
+pcl::PointCloud <pcl::PointXYZ>::Ptr registrations::icpAlign(pcl::PointCloud<pcl::PointXYZ>::Ptr point_cloud,
+                                                                 pcl::PointCloud<pcl::PointXYZ>::Ptr reference, double icp_distance, double epsilon){
+
+    pcl::IterativeClosestPoint<pcl::PointXYZ, pcl::PointXYZ> icp;
+    icp.setInputSource(point_cloud);
+    icp.setInputTarget(reference);
+    // Set the max correspondence distance
+    icp.setMaxCorrespondenceDistance(icp_distance);
+    // Set the maximum number of iterations (criterion 1)
+    icp.setMaximumIterations(50);
+    // Set the transformation epsilon (criterion 2)
+    icp.setTransformationEpsilon(epsilon);
+    // Set the euclidean distance difference epsilon (criterion 3)
+    icp.setEuclideanFitnessEpsilon(1.0);
+    //pcl::PointCloud<pcl::PointXYZ>cloud_icp;
+    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_icp(new pcl::PointCloud<pcl::PointXYZ>);
+    icp.align(*cloud_icp);
+    std::cout << "has converged:" << icp.hasConverged() << " score: " <<
+              icp.getFitnessScore() << std::endl;
+    std::cout << icp.getFinalTransformation() << std::endl;
+    return cloud_icp;
+
+}
+
+
+
 //Function to align point clouds using Normal Distribution Transform (CURRENTLY NOT USED)
 Eigen::Matrix4f registrations::pairAlign(const PointCloudRGB::Ptr cloud_src, const PointCloudRGB::Ptr cloud_tgt)
 {

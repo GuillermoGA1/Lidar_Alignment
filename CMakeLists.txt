@@ -21,16 +21,12 @@ list(APPEND CLOUD "src/cloud.cpp")
 list(APPEND FILTERS "src/filters.cpp")
 list(APPEND REGISTRATIONS "src/registrations.cpp")
 
-add_executable(align_rt src/align_rt.cpp ${CLOUD} ${FILTERS} ${REGISTRATIONS})
+
 add_executable(aligncad src/aligncad.cpp ${CLOUD} ${FILTERS} ${REGISTRATIONS})
 add_executable(align_gps_rt src/align_gps_rt.cpp ${CLOUD} ${FILTERS} ${REGISTRATIONS})
-add_executable(gps src/gps.cpp)
-add_executable(reg_grow src/reg_grow.cpp)
 
-target_link_libraries(align_rt ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+
 target_link_libraries(aligncad ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 target_link_libraries(align_gps_rt ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${Boost_LIBRARIES})
-target_link_libraries(gps ${catkin_LIBRARIES} ${PCL_LIBRARIES})
-target_link_libraries(reg_grow ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 
 

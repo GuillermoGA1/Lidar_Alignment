@@ -81,24 +81,8 @@ pcl::PointCloud <pcl::PointXYZRGB>::Ptr cloud::reg_grow_segmentation(pcl::PointC
 pcl::PointCloud <pcl::PointXYZ>::Ptr cloud::compare_clouds(int method,pcl::PointCloud<pcl::PointXYZ>::Ptr input_cloud,
                                                            pcl::PointCloud<pcl::PointXYZ>::Ptr reference_cloud, double icp_distance, double epsilon){
     if (method == 1){ //Simple point to plane ICP
-        pcl::IterativeClosestPoint<pcl::PointXYZ, pcl::PointXYZ> icp;
-        icp.setInputSource(input_cloud);
-        icp.setInputTarget(reference_cloud);
-        // Set the max correspondence distance
-        icp.setMaxCorrespondenceDistance(icp_distance);
-        // Set the maximum number of iterations (criterion 1)
-        icp.setMaximumIterations(50);
-        // Set the transformation epsilon (criterion 2)
-        icp.setTransformationEpsilon(epsilon);
-        // Set the euclidean distance difference epsilon (criterion 3)
-        icp.setEuclideanFitnessEpsilon(1.0);
-
-        //pcl::PointCloud<pcl::PointXYZ>cloud_icp;
-        pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_icp(new pcl::PointCloud<pcl::PointXYZ>);
-        icp.align(*cloud_icp);
-        std::cout << "has converged:" << icp.hasConverged() << " score: " <<
-                  icp.getFitnessScore() << std::endl;
-        std::cout << icp.getFinalTransformation() << std::endl;
+        registrations icp;
+        pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_icp = icp.icpAlign(input_cloud,reference_cloud, icp_distance, epsilon);
         return cloud_icp;
     }else if (method == 2){ //Normal distribution transform registration
         registrations ndr;
