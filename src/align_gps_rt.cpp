@@ -318,5 +318,5 @@ int main(int argc, char **argv)
     myfile.close();
 
 }
-//rosrun tf static_transform_publisher 0 0 0 0 0 0 map base_link 50
+
 

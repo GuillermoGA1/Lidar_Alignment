@@ -215,5 +215,5 @@ int main(int argc, char **argv)
         loop_rate.sleep ();
     }
 }
-//rosrun tf static_transform_publisher 0 0 0 0 0 0 map base_link 50
+////rosrun tf static_transform_publisher 0 0 0 0 0 0 map base_link 50
 
