@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: new_node
+Description: Description of new_node
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: roscpp sensor_msgs pcl_conversions message_filters

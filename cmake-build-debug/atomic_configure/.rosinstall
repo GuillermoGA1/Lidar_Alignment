@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/guillermo/catkin_ws/src/new_node/cmake-build-debug/devel/setup.sh
